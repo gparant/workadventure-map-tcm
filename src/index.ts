@@ -62,6 +62,9 @@ WA.onInit().then(() => {
         openPopup(currentZone, currentZone + 'Popup')
     });
     WA.room.onLeaveLayer('TCMAroundTheWorld').subscribe(closePopup);
+
+    //init TDM scripting
+    initTDMScripting();
 }).catch(e => console.error(e));
 
 function openPopup(zoneName: string, popupName: string) {
@@ -78,4 +81,38 @@ function closePopup(){
         currentPopup.close();
         currentPopup = undefined;
     }
+}
+
+function initTDMScripting(){
+    WA.room.onEnterLayer('zone-purple-door').subscribe(() => {
+        if(!WA.player.tags.includes('purple'))return;
+        WA.room.hideLayer('close-purple-door');
+    });
+    WA.room.onLeaveLayer('zone-purple-door').subscribe(() => {
+        WA.room.showLayer('close-purple-door');
+    });
+
+    WA.room.onEnterLayer('zone-blue-door').subscribe(() => {
+        if(!WA.player.tags.includes('blue'))return;
+        WA.room.hideLayer('close-blue-door');
+    });
+    WA.room.onLeaveLayer('zone-blue-door').subscribe(() => {
+        WA.room.showLayer('close-blue-door');
+    });
+
+    WA.room.onEnterLayer('zone-yellow-door').subscribe(() => {
+        if(!WA.player.tags.includes('yellow'))return;
+        WA.room.hideLayer('close-yellow-door');
+    });
+    WA.room.onLeaveLayer('zone-yellow-door').subscribe(() => {
+        WA.room.showLayer('close-yellow-door');
+    });
+
+    WA.room.onEnterLayer('zone-red-door').subscribe(() => {
+        if(!WA.player.tags.includes('red'))return;
+        WA.room.hideLayer('close-red-door');
+    });
+    WA.room.onLeaveLayer('zone-red-door').subscribe(() => {
+        WA.room.showLayer('close-red-door');
+    });
 }
